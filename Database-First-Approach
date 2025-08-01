@@ -1,0 +1,13 @@
+dotnet ef dbcontext scaffold "Server=DESKTOP-1KE4I02\SQLEXPRESS01;Database=hr_mangment_system;Trusted_Connection=True;Encrypt=False;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -o Models
+
+// appsetting.json page
+
+"ConnectionStrings": {
+  "dbcs": "Server=DESKTOP-1KE4I02\\SQLEXPRESS01;Database=hr_mangment_system;Trusted_Connection=True;Encrypt=False;TrustServerCertificate=True;"
+},
+
+// Prograc.cs page
+
+var provide = builder.Services.BuildServiceProvider();
+var config =  provide.GetRequiredService<IConfiguration>();
+builder.Services.AddDbContext<HrMangmentSystemContext>(item => item.UseSqlServer(config.GetConnectionString("dbcs")));
